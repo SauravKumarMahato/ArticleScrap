@@ -18,7 +18,7 @@ The project integrates broswerless and puppeteer to scrap the articles based on 
 
 <!-- demo link -->
 
-<!-- https://github.com/SauravKumarMahato/FunFlag/assets/83631265/032b587e-80c5-4ece-8205-d1fa76b8e8ae -->
+https://github.com/SauravKumarMahato/ArticleScrap/assets/83631265/9b57d7a4-4673-427a-a911-19f54db93178
 
 coming soon
 
