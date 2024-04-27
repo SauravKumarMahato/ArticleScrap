@@ -6,6 +6,7 @@ import {
   CardBody,
   CardFooter,
   Typography,
+  Spinner
 } from "@material-tailwind/react";
 import axios from "axios";
 import PropTypes from "prop-types";
@@ -15,6 +16,7 @@ import image from "../../assets/article_image.jpg";
 export default function ArticlePage() {
   const [inputValue, setInputValue] = useState("");
   const [doodles, setDoodles] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // Load doodles from localStorage on component mount
   useEffect(() => {
@@ -27,11 +29,13 @@ export default function ArticlePage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      setLoading(true);
       const response = await axios.get("http://127.0.0.1:8000/articles", {
         params: {
           input: inputValue,
         },
       });
+      setLoading(false);  
       setDoodles(response.data);
 
       // Save doodles to localStorage
@@ -64,11 +68,12 @@ export default function ArticlePage() {
       </div>
 
       {/* Rendering doodles */}
-      <div className="mt-6 space-y-4 grid grid-cols-3 gap-10">
+      {loading ? (<div className="grid justify-center mt-40"><Spinner className="h-16 w-16 text-gray-900/50 " /></div>) : ( <div className="mt-6 space-y-4 grid grid-cols-3 gap-10">
         {doodles.map((doodle, index) => (
           <CardDefault key={index} title={doodle.title} link={doodle.link} webLink={doodle.webLink} />
         ))}
-      </div>
+      </div>)}
+     
     </div>
   );
 }
